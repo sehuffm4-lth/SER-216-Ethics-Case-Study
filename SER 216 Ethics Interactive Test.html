@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Software Engineering Ethics Interactive</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6;
+        }
+        .container {
+            max-width: 900px;
+            margin: auto;
+            padding: 2rem;
+        }
+        .card {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            transition: background-color 0.2s;
+        }
+        .btn-primary {
+            background-color: #4f46e5;
+            color: white;
+        }
+        .btn-primary:hover {
+            background-color: #4338ca;
+        }
+        .btn-disabled {
+            background-color: #a5b4fc;
+            cursor: not-allowed;
+        }
+        .feedback {
+            margin-top: 1rem;
+            padding: 1rem;
+            border-radius: 0.5rem;
+        }
+        .feedback-correct {
+            background-color: #d1fae5;
+            color: #065f46;
+        }
+        .feedback-incorrect {
+            background-color: #fee2e2;
+            color: #991b1b;
+        }
+        /* Hide all pages by default */
+        .page { display: none; }
+        .page.active { display: block; }
+
+        /* Custom checkbox styling */
+        .principles-list input[type="checkbox"] {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            display: inline-block;
+            width: 1.5rem;
+            height: 1.5rem;
+            background-color: #e5e7eb;
+            border: 2px solid #9ca3af;
+            border-radius: 0.25rem;
+            vertical-align: middle;
+            transition: background-color 0.2s, border-color 0.2s;
+            cursor: pointer;
+        }
+        .principles-list input[type="checkbox"]:checked {
+            background-color: #4f46e5;
+            border-color: #4f46e5;
+        }
+        .principles-list input[type="checkbox"]:checked::after {
+            content: '✓';
+            color: white;
+            font-weight: bold;
+            display: block;
+            text-align: center;
+            line-height: 1.2;
+        }
+        .principles-list label {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen flex items-center justify-center p-4">
+
+    <div id="app-container" class="container">
+        <!-- Welcome Screen -->
+        <div id="welcome-page" class="page active card text-center">
+            <h1 class="text-3xl font-bold mb-4 text-gray-800">Software Engineering Ethics Interactive</h1>
+            <p class="text-lg text-gray-600 mb-6">
+                Welcome to the Software Engineering Ethics Interactive! There will be three case studies that we will look at. For each one, read through the presented scenario. Then, we will ask you to identify which principles from the SE Code of Ethics and Professional Practice are relevant to that case study. After you have selected the ones you think apply, you can submit them to check if they are correct. When you have the correct ones, there will be some discussion and analysis of the scenario, how the Code applies, and then we will move to the next case study. Click Continue below to begin!
+            </p>
+            <button id="welcome-continue-btn" class="btn btn-primary mt-4">Continue</button>
+        </div>
+
+        <!-- Case Study 1 -->
+        <div id="case-study-1-page" class="page card">
+            <h2 class="text-2xl font-bold mb-4 text-gray-800">Case Study 1: Leikessa Jones</h2>
+            <div class="text-gray-700 space-y-4 text-lg">
+                <p>
+                    Leikessa Jones owns her own consulting business, and has several people working for her. Leikessa is currently designing a database management system for the personnel office of ToyTimeInc., a mid-sized company that makes toys. Leikessa has involved ToyTimeInc management in the design process from the start of the project. It is now time to decide about the kind and degree of security to build into the system. 
+                </p>
+                <p>
+                    Leikessa has described several options to the client. The client has decided to opt for the least secure system because the system is going to cost more than was initially planned, and the least secure option is the cheapest security option. Leikessa knows that the database includes sensitive information, such as performance evaluations, medical records, and salaries. With weak security, she fears that enterprising ToyTimeInc employees will be able to easily access this sensitive data. Furthermore, she fears that the system will be an easy target for external hackers. Leikessa feels strongly that the system should be more secure than it would be if the least secure option is selected. 
+                </p>
+                <p>
+                    Ms. Jones has tried to explain the risks to ToyTimeInc, but the CEO, the CIO, and the Director of Personnel are all convinced that the cheapest security is what they want. Should Jones refuse to build the system with the least secure option?
+                </p>
+            </div>
+            <button id="case-study-1-continue-btn" class="btn btn-primary mt-6">Continue</button>
+        </div>
+
+        <!-- Principles 1 -->
+        <div id="principles-1-page" class="page card">
+            <h2 class="text-2xl font-bold mb-4 text-gray-800">Case Study 1 Principles</h2>
+            <p class="text-lg text-gray-600 mb-6">Select all the principles from the Software Engineering Code of Ethics and Professional Practice that are relevant to this case study.</p>
+            <div class="principles-list space-y-3 mb-6">
+                <label><input type="checkbox" name="principle1" value="Public"> Public</label>
+                <label><input type="checkbox" name="principle1" value="Client and Employer"> Client and Employer</label>
+                <label><input type="checkbox" name="principle1" value="Product"> Product</label>
+                <label><input type="checkbox" name="principle1" value="Judgement"> Judgement</label>
+                <label><input type="checkbox" name="principle1" value="Management"> Management</label>
+                <label><input type="checkbox" name="principle1" value="Profession"> Profession</label>
+                <label><input type="checkbox" name="principle1" value="Colleagues"> Colleagues</label>
+                <label><input type="checkbox" name="principle1" value="Self"> Self</label>
+            </div>
+            <div id="principles1-feedback" class="feedback hidden"></div>
+            <div class="flex justify-between items-center mt-6">
+                <button id="check-answers-1-btn" class="btn btn-primary">Check Answers</button>
+                <button id="principles-1-continue-btn" class="btn btn-primary btn-disabled" disabled>Continue</button>
+            </div>
+        </div>
+
+        <!-- Analysis 1 -->
+        <div id="analysis-1-page" class="page card">
+            <h2 class="text-2xl font-bold mb-4 text-gray-800">Case Study 1 Analysis</h2>
+            <div class="text-gray-700 space-y-6 text-lg">
+                <p>
+                    Now that you have identified the core principles, let's analyze the case study further. Respond to the following questions in your discussion or self-reflection:
+                </p>
+                <ol class="list-decimal list-inside space-y-4">
+                    <li>Why is the decision to opt for the least secure system a problem, even if the client has accepted the risks? How does this decision impact the "Public" and "Product" principles?</li>
+                    <li>What are Leikessa's professional obligations in this situation, considering her knowledge of the potential risks?</li>
+                    <li>What steps could Leikessa have taken earlier in the project to prevent this ethical dilemma from reaching a point of conflict?</li>
+                </ol>
+            </div>
+            <button id="analysis-1-continue-btn" class="btn btn-primary mt-6">Continue</button>
+        </div>
+
+        <!-- Case Study 2 -->
+        <div id="case-study-2-page" class="page card">
+            <h2 class="text-2xl font-bold mb-4 text-gray-800">Case Study 2: Zara</h2>
+            <div class="text-gray-700 space-y-4 text-lg">
+                <p>
+                    Zara is a software engineer at a fast-growing startup developing a mobile app for mental health support. Due to tight deadlines, management imposes a grueling work schedule, requiring engineers to work nights and weekends without additional compensation.
+                </p>
+                <p>
+                    Zara notices that the excessive workload is affecting her and her colleagues' well-being, leading to burnout and increased errors in the code. Some developers have started cutting corners, skipping critical testing phases to meet deadlines. This has resulted in multiple app crashes and inaccurate mental health assessments for users.
+                </p>
+                <p>
+                    She raises her concerns with her manager, explaining that the current work conditions are unsustainable and could harm both employees and users. The manager dismisses her concerns, arguing that this is the norm in the startup world and that once the app gains traction, things will improve.
+                </p>
+            </div>
+            <button id="case-study-2-continue-btn" class="btn btn-primary mt-6">Continue</button>
+        </div>
+
+        <!-- Principles 2 -->
+        <div id="principles-2-page" class="page card">
+            <h2 class="text-2xl font-bold mb-4 text-gray-800">Case Study 2 Principles</h2>
+            <p class="text-lg text-gray-600 mb-6">Select all the principles from the Software Engineering Code of Ethics and Professional Practice that are relevant to this case study.</p>
+            <div class="principles-list space-y-3 mb-6">
+                <label><input type="checkbox" name="principle2" value="Public"> Public</label>
+                <label><input type="checkbox" name="principle2" value="Client and Employer"> Client and Employer</label>
+                <label><input type="checkbox" name="principle2" value="Product"> Product</label>
+                <label><input type="checkbox" name="principle2" value="Judgement"> Judgement</label>
+                <label><input type="checkbox" name="principle2" value="Management"> Management</label>
+                <label><input type="checkbox" name="principle2" value="Profession"> Profession</label>
+                <label><input type="checkbox" name="principle2" value="Colleagues"> Colleagues</label>
+                <label><input type="checkbox" name="principle2" value="Self"> Self</label>
+            </div>
+            <div id="principles2-feedback" class="feedback hidden"></div>
+            <div class="flex justify-between items-center mt-6">
+                <button id="check-answers-2-btn" class="btn btn-primary">Check Answers</button>
+                <button id="principles-2-continue-btn" class="btn btn-primary btn-disabled" disabled>Continue</button>
+            </div>
+        </div>
+
+        <!-- Analysis 2 -->
+        <div id="analysis-2-page" class="page card">
+            <h2 class="text-2xl font-bold mb-4 text-gray-800">Case Study 2 Analysis</h2>
+            <div class="text-gray-700 space-y-6 text-lg">
+                <p>
+                    Consider the following questions as you reflect on Zara's situation:
+                </p>
+                <ol class="list-decimal list-inside space-y-4">
+                    <li>How do the grueling work schedule and corner-cutting violate the "Product" and "Profession" principles?</li>
+                    <li>How does Zara's situation relate to the "Colleagues" and "Self" principles?</li>
+                    <li>What ethical steps could Zara take if her manager continues to dismiss her concerns and the problems persist?</li>
+                </ol>
+            </div>
+            <button id="analysis-2-continue-btn" class="btn btn-primary mt-6">Continue</button>
+        </div>
+
+        <!-- Case Study 3 -->
+        <div id="case-study-3-page" class="page card">
+            <h2 class="text-2xl font-bold mb-4 text-gray-800">Case Study 3: AI Bias</h2>
+            <div class="text-gray-700 space-y-4 text-lg">
+                <p>
+                    You are a software engineer working on an AI-powered recruitment tool for a major tech company. After deployment, an internal audit reveals that the algorithm disproportionately rejects female candidates for technical roles. Further investigation shows that the training data was biased toward historical hiring patterns that favored men.
+                </p>
+                <p>
+                    Your manager suggests keeping the algorithm as is since changing it would delay product release and cost millions. He argues that the company is not explicitly discriminating—it's just a flaw in the data.
+                </p>
+            </div>
+            <button id="case-study-3-continue-btn" class="btn btn-primary mt-6">Continue</button>
+        </div>
+
+        <!-- Principles 3 -->
+        <div id="principles-3-page" class="page card">
+            <h2 class="text-2xl font-bold mb-4 text-gray-800">Case Study 3 Principles</h2>
+            <p class="text-lg text-gray-600 mb-6">Select all the principles from the Software Engineering Code of Ethics and Professional Practice that are relevant to this case study.</p>
+            <div class="principles-list space-y-3 mb-6">
+                <label><input type="checkbox" name="principle3" value="Public"> Public</label>
+                <label><input type="checkbox" name="principle3" value="Client and Employer"> Client and Employer</label>
+                <label><input type="checkbox" name="principle3" value="Product"> Product</label>
+                <label><input type="checkbox" name="principle3" value="Judgement"> Judgement</label>
+                <label><input type="checkbox" name="principle3" value="Management"> Management</label>
+                <label><input type="checkbox" name="principle3" value="Profession"> Profession</label>
+                <label><input type="checkbox" name="principle3" value="Colleagues"> Colleagues</label>
+                <label><input type="checkbox" name="principle3" value="Self"> Self</label>
+            </div>
+            <div id="principles3-feedback" class="feedback hidden"></div>
+            <div class="flex justify-between items-center mt-6">
+                <button id="check-answers-3-btn" class="btn btn-primary">Check Answers</button>
+                <button id="principles-3-continue-btn" class="btn btn-primary btn-disabled" disabled>Continue</button>
+            </div>
+        </div>
+
+        <!-- Analysis 3 -->
+        <div id="analysis-3-page" class="page card">
+            <h2 class="text-2xl font-bold mb-4 text-gray-800">Case Study 3 Analysis</h2>
+            <div class="text-gray-700 space-y-6 text-lg">
+                <p>
+                    Consider the following questions as you reflect on the AI bias case study:
+                </p>
+                <ol class="list-decimal list-inside space-y-4">
+                    <li>Explain why the AI system is unethical, even if the bias was unintentional and the company is "just" using historical data. How does this decision impact the "Public" principle?</li>
+                    <li>What is the ethical responsibility of the software engineer and the manager in this scenario?</li>
+                    <li>How could the team have prevented this issue from occurring in the first place?</li>
+                </ol>
+            </div>
+            <button id="analysis-3-continue-btn" class="btn btn-primary mt-6">Continue</button>
+        </div>
+
+        <!-- End Screen -->
+        <div id="end-page" class="page card text-center">
+            <h2 class="text-3xl font-bold mb-4 text-gray-800">Thanks for participating!</h2>
+            <p class="text-lg text-gray-600 mb-6">
+                Thanks for going through the ethics interactive! You are welcome to ask questions about this. You can close this now.
+            </p>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const pages = {
+                'welcome-page': document.getElementById('welcome-page'),
+                'case-study-1-page': document.getElementById('case-study-1-page'),
+                'principles-1-page': document.getElementById('principles-1-page'),
+                'analysis-1-page': document.getElementById('analysis-1-page'),
+                'case-study-2-page': document.getElementById('case-study-2-page'),
+                'principles-2-page': document.getElementById('principles-2-page'),
+                'analysis-2-page': document.getElementById('analysis-2-page'),
+                'case-study-3-page': document.getElementById('case-study-3-page'),
+                'principles-3-page': document.getElementById('principles-3-page'),
+                'analysis-3-page': document.getElementById('analysis-3-page'),
+                'end-page': document.getElementById('end-page'),
+            };
+
+            const pageFlow = [
+                'welcome-page', 'case-study-1-page', 'principles-1-page', 'analysis-1-page',
+                'case-study-2-page', 'principles-2-page', 'analysis-2-page',
+                'case-study-3-page', 'principles-3-page', 'analysis-3-page', 'end-page'
+            ];
+
+            let currentPageIndex = 0;
+
+            function showPage(pageId) {
+                for (const id in pages) {
+                    pages[id].classList.remove('active');
+                }
+                pages[pageId].classList.add('active');
+            }
+
+            function navigateToNextPage() {
+                currentPageIndex++;
+                if (currentPageIndex < pageFlow.length) {
+                    showPage(pageFlow[currentPageIndex]);
+                }
+            }
+
+            // Correct answers for each principles section
+            const correctAnswers = {
+                1: ['Public', 'Client and Employer', 'Product'],
+                2: ['Public', 'Product', 'Profession', 'Self'],
+                3: ['Public', 'Product', 'Profession'],
+            };
+
+            function checkPrinciples(caseNumber) {
+                const checkboxes = document.querySelectorAll(`input[name="principle${caseNumber}"]:checked`);
+                const selectedAnswers = Array.from(checkboxes).map(cb => cb.value);
+                const feedbackElement = document.getElementById(`principles${caseNumber}-feedback`);
+                const continueBtn = document.getElementById(`principles-${caseNumber}-continue-btn`);
+                
+                const correctCount = selectedAnswers.filter(value => correctAnswers[caseNumber].includes(value)).length;
+                const incorrectCount = selectedAnswers.length - correctCount;
+                const missingCorrectCount = correctAnswers[caseNumber].length - correctCount;
+
+                feedbackElement.classList.remove('hidden', 'feedback-correct', 'feedback-incorrect');
+
+                if (correctCount === correctAnswers[caseNumber].length && incorrectCount === 0) {
+                    feedbackElement.textContent = "Great job!";
+                    feedbackElement.classList.add('feedback-correct');
+                    continueBtn.disabled = false;
+                    continueBtn.classList.remove('btn-disabled');
+                } else if (correctCount === 0 && selectedAnswers.length > 0) {
+                    feedbackElement.textContent = "Hmm… we disagree. While you might be able to make an argument for some of your choices, we feel there are a few key principles, and unfortunately you have not chosen any of them.";
+                    feedbackElement.classList.add('feedback-incorrect');
+                } else if (missingCorrectCount > 0) {
+                    feedbackElement.textContent = "Hmm… we disagree. While you might be able to make an argument for some of your choices, we feel there are a few key principles that you did not include.";
+                    feedbackElement.classList.add('feedback-incorrect');
+                } else if (incorrectCount > 0) {
+                    feedbackElement.textContent = "Alright, you have selected all of the principles that we feel apply to this scenario. However, you have some extras in there that we feel do not apply. Are there any that you can remove? Consider any that you felt you were stretching to include, or were on the fence about.";
+                    feedbackElement.classList.add('feedback-incorrect');
+                }
+            }
+
+            // Event listeners
+            document.getElementById('welcome-continue-btn').addEventListener('click', navigateToNextPage);
+            document.getElementById('case-study-1-continue-btn').addEventListener('click', navigateToNextPage);
+            document.getElementById('principles-1-continue-btn').addEventListener('click', navigateToNextPage);
+            document.getElementById('analysis-1-continue-btn').addEventListener('click', navigateToNextPage);
+
+            document.getElementById('case-study-2-continue-btn').addEventListener('click', navigateToNextPage);
+            document.getElementById('principles-2-continue-btn').addEventListener('click', navigateToNextPage);
+            document.getElementById('analysis-2-continue-btn').addEventListener('click', navigateToNextPage);
+
+            document.getElementById('case-study-3-continue-btn').addEventListener('click', navigateToNextPage);
+            document.getElementById('principles-3-continue-btn').addEventListener('click', navigateToNextPage);
+            document.getElementById('analysis-3-continue-btn').addEventListener('click', navigateToNextPage);
+
+            document.getElementById('check-answers-1-btn').addEventListener('click', () => checkPrinciples(1));
+            document.getElementById('check-answers-2-btn').addEventListener('click', () => checkPrinciples(2));
+            document.getElementById('check-answers-3-btn').addEventListener('click', () => checkPrinciples(3));
+
+            // Initial state
+            showPage('welcome-page');
+        });
+    </script>
+</body>
+</html>
